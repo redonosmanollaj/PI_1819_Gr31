@@ -8,6 +8,6 @@
 </head>
 <body>
     <h1>Ky eshte projekti ne PHP, nga lenda Programimi ne internet</h1>
-    <h1></h1>
+    <h1>Redon Osmanollaj</h1>
 </body>
 </html>
