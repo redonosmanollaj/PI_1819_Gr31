@@ -1,0 +1,114 @@
+#header{
+  background-color: rgb(141, 25, 25);
+  margin-top: 0px;
+    height: 80px;
+    color: white;
+   }
+.logo{
+  font-size: 40px;  
+  font-family: Sans-serif;
+  margin-top: 20px;
+  margin-left: 10px;}
+.hyperlink{
+  font-size: 20px;
+  float:left;
+  width: 25%;
+  margin-top: 30px;
+  color: hsl(0, 0%, 85%);
+  text-decoration: none;
+}
+.hyperlink:hover{
+    color: black;
+    text-decoration: overline;
+   
+ }
+ .sticky {
+  position: fixed;
+  top: 0;
+  width: 99%;
+  z-index: 2;
+}
+div.background{
+  height: 800px;
+  background-color: rgb(228, 223, 203);
+
+}
+footer{background-color: rgb(51,0,0);
+  color: rgb(193, 193, 193);
+  font-family: sans-serif;
+  height: 45px;
+  font-size: small;
+}
+div.map{
+  float: right;
+  margin: 100px 200px 0px 0px;
+}
+div.text{
+  float: left;
+  margin: 130px 0px 0px 390px;
+  color: #4f5b61bf;
+  font-family: 'Avenir LT W01 65', Arial;
+}
+a.email{
+  text-decoration: none;
+  color:  #494a56;
+  font-weight:500;
+}
+a.email:hover{
+  font-weight:700;
+}
+
+.right-div{
+  text-align: center;
+  float:right;
+  width:50%;
+  margin-top:10em;
+  margin-right: 3em;
+  color:hsl(0, 0%, 85%);
+  background-color: rgb(100, 25, 25);
+  border-radius:10px;
+}
+
+
+.left-div{
+  float:left;
+  width:40%;
+  color: #404a4a;   
+}
+fieldset button{
+  background-color: rgb(100, 25, 25);
+  text-align:center;
+  height:30px;
+  color:white;
+  align-content: center;
+  border: none;
+  border-radius:5px 5px 5px 5px;
+  font-family: serif;
+  font-size: 110%;
+}
+fieldset{
+    
+  background-color:rgba(177, 170, 124, 0.84);
+  margin: 0 0 0 0;
+  border-width: 1px;   
+}
+fieldset input, textarea{
+  margin:5px 0px;
+  width:30em;
+  padding: 5px;
+  font-family:serif;
+  border-radius: 3px;
+  border:none;
+}
+h1{
+  padding-left: 20px;
+  padding-bottom: 0;
+  padding-top: 20px;
+}
+.social{
+  font-family: sans-serif;
+  color: rgb(106, 121, 128);
+  font-size: x-large;
+  text-align: center;
+  margin-top: 30px;
+}

@@ -1,0 +1,182 @@
+
+footer{background-color: rgb(51,0,0);
+			color: rgb(193, 193, 193);
+			font-family: sans-serif;
+			height: 45px;
+			font-size: small;
+		}
+		td,tr.figura{
+		border-width: 5px;
+		border-style: solid;
+		border-color:rgb(54, 6, 6);
+		
+		height: 90px;
+		width: 90px;
+		text-align: center;
+		font-size: 20px;
+		}
+
+#header{
+	background-color: rgb(141, 25, 25);
+ 	margin-top: 0px;
+  	height: 80px;
+   	color: white;
+
+   }
+.logo{
+font-size: 40px;  
+  font-family: Sans-serif;
+  margin-top: 20px;
+  margin-left: 10px;
+
+}
+.hyperlink{
+	font-size: 20px;
+	float:left;
+	width: 25%;
+	margin-top: 30px;
+	color: hsl(0, 0%, 85%);
+	text-decoration: none;
+}
+.hyperlink:hover{
+    color: black;
+    text-decoration: overline;
+   
+   }
+   .sticky {
+    position: fixed;
+    top: 0;
+    width: 99%;
+    z-index: 2;
+  }
+.posht{
+	font-family:sans-serif;
+	font-size: 10pt;
+	float: right;
+	width: 25%;
+	margin-top:-14px;
+}
+#pjesa2{
+	background-color:rgb(54, 6, 6);
+	color:white;
+	height:300px;}
+
+/*Fillimi i pjeses se trete*/
+#pjesa3{
+	height: 400px;
+	background-color: rgb(228, 223, 203);
+}
+#tabelat{
+	width: 88%;
+	height: 27%;
+	padding-top: 3%;
+	margin-right: 6%;
+	margin-left: 6%;
+	margin-top: -55px;
+	background-color: white;
+	display: -webkit-inline-box;
+}
+.tabela1{
+	margin-left: -5%;
+	padding-top: 137px;
+	padding-bottom: 0px;
+	padding-left: 96px;
+	padding-right: 95px;
+}	
+.tabela2{
+	margin-left: 10%;
+	padding-top: 132px;
+	padding-bottom: 0px;
+	padding-right: 95px;
+}	
+.tabela3{
+	margin-left: 3%;
+	padding-top: 130px;
+	padding-left: 99px;
+	padding-right: 115px;
+}
+#permbajtja{
+	width: 88%;
+	height: 9%;
+	padding-top: 15%;
+	margin-top: -4px;
+	margin-right: 6%;
+	margin-left: 6%;
+	background-color: white;
+	display: -webkit-inline-box;
+}
+.teksti{
+	width: 265px;
+	height: 223px;
+	color: black;
+}
+.listat{ 
+	font-size: 15px; 
+	margin-bottom: 10px;
+}
+
+/*Perfundimi i pjeses se trete*/	
+
+#pjesa4{
+	background-color: rgba(177, 170, 124, 0.84);
+	height: 440px;
+	
+}
+button{
+	border: none;
+	background-color:#f7f7f7;
+	color:darkblue;
+	width: 80px;
+	height: 30px;
+	margin-top: 15px;
+	border-radius: 5px;
+}
+input.fund{
+	width: 47%;
+	float: left;
+	margin-left: 10px;
+	margin-top: -20px;
+	border: none;
+	height: 20px;
+}
+label,div.fund{
+	color: rgb(111,128,128);
+	font-family: sans-serif;
+
+
+}	
+label{
+	background-color: rgb(228, 223, 203);
+	width: 50px; 
+	padding-top: 3px; 
+	padding-bottom: 5px;
+	padding-right: 10px; 
+	padding-left: 10px;
+}	
+h2.fund{
+	color:#404a4a;
+	margin-left: 10px;
+
+}
+div.fund1{
+	float: left;
+	margin-left: 10px;
+	margin-top: 15px;
+	color: #404a4a;
+	width: 70%;
+	font-size: larger;
+	color: #404a4a;
+	font-family: sans-serif;
+}	
+
+img{
+	width: 95px;
+	height: 95px;
+}
+.school
+{
+	margin-left:20px;
+	color: rgb(227, 227, 227);
+ 	width: 35%;
+  	font-size:40px;
+}

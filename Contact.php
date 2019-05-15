@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html manifest="manifest.appcache">
+<head>
+	<title>Contact | Cultivated School</title>
+	 <link rel="stylesheet" href="css/contactStyle.css">
+	 <script type="text/javascript">
+      function check(){
+      
+        var name=document.getElementById('name').value;
+        var telephone=document.getElementById('telephone').value;
+        var email=document.getElementById('email').value;
+        var subject=document.getElementById('subject').value;
+        var message=document.getElementById('message').value;
+
+        
+
+        if(name == ""){
+          document.getElementById('fillname').innerHTML="* Please fill the name";
+          document.getElementById('name').focus();
+          return false;
+        }
+        else{
+        	document.getElementById('fillname').innerHTML="";
+          document.getElementById('telephone').focus();
+        }
+
+          if(telephone == ""){
+          document.getElementById('filltelephone').innerHTML="* Please fill the telephone number";
+          return false;
+        }
+        else{
+        	document.getElementById('filltelephone').innerHTML="";
+          document.getElementById('email').focus();}
+         
+          if(email == ""){
+          document.getElementById('fillemail').innerHTML="* Please fill the e-mail";
+          return false;
+        }
+        else{
+        	document.getElementById('fillemail').innerHTML="";
+          document.getElementById('subject').focus();
+        }
+          if(subject == ""){
+          document.getElementById('fillsubject').innerHTML="* Please fill the subject";
+          return false;
+        }
+        else{
+        	document.getElementById('fillsubject').innerHTML="";
+          document.getElementById('message').focus();
+        }
+          if(message == ""){
+          document.getElementById('fillmessage').innerHTML="* Please fill the message";
+          return false;
+        }
+        else{
+        	document.getElementById('fillmessage').innerHTML="";
+          document.getElementById('name').focus();
+
+        }
+
+      
+        $("#myform")[0].reset();
+      }
+
+      function save(){
+        var nameInput=document.getElementById('name').value;
+        var telephoneInput=document.getElementById('telephone').value;
+        var emailInput=document.getElementById('email').value;
+        var subjectInput=document.getElementById('subject').value;
+        var messageInput=document.getElementById('message').value;
+
+
+        localStorage.setItem('text', nameInput);
+        localStorage.setItem('text', telephoneInput);
+        localStorage.setItem('text', emailInput);
+        localStorage.setItem('text', subjectInput);
+        localStorage.setItem('text', messageInput);
+
+      }
+      
+    </script>
+</head>
+<body>
+	<div id="header">
+        <div style="width: 100%;">
+            <div style="width: 50%;float: left; margin-top: 10px; "><a class="logo" style="color:rgb(227, 227, 227);text-decoration: none;" href="index.html";>Miami University</a></div>
+            <div style="width: 50%; float: right;">
+
+                <div><a class="hyperlink" href="Company.html">COMPANY</a></div>
+                <div><a class="hyperlink" href="services.html">SERVICES</a></div>
+                <div><a class="hyperlink" href="Contact.html" style="color: black;text-decoration: overline;">CONTACT</a></div>
+                <div><a class="hyperlink" href="Gallery.html">GALLERY</a></div>
+
+            </div>
+        </div>
+    </div>
+    <div class="background">
+    	<div class="map">
+    		<a href="https://www.google.com/maps/place/Miami+University/@39.5105804,-84.7335121,16.75z/data=!4m5!3m4!1s0x884022c4d025ec71:0xfce7a4ae2c12bf0f!8m2!3d39.5105334!4d-84.7308768">
+    			<img src="images/map.png" width="400" height="300">
+    			
+    		</a>
+    	</div>
+    	<div class="text">
+    		<h1>Contact</h1>
+    		<strong>
+    			Miami University
+    		</strong>
+    		<br>
+    		<br>
+    		<address>501 E High St
+    			<br>
+    			Oxford
+    			<br>
+    		</address>
+    		<p>
+    			Tel.: +381(0)63 133 0392
+    			<br>
+    			Fax: +381(0)38 222 233
+    			<br>
+    			E-mail: <a class="email" href="mailto:lirimimeri17@gmail.com" style="">admit@cultivated.uk</a>
+    		</p>
+    	</div>
+
+    	<div>
+    		<br>
+
+    		<div style="color:rgb(141, 25, 25);font-size: xx-large;margin-left:  20%;">
+        ____________________________________________________</div>
+    		<div class="social">Social Networks</div>
+    		<div style="text-align: center;margin-top: 20px;">
+    			<a href="https://www.instagram.com" style="text-decoration: none;">
+    				<img src="images/instagram.png" width="45px" height="45px">
+    			</a>
+    			
+    			<a href="https://web.facebook.com/lirim.imeri2" target="_blank" style="margin-left: 30px;text-decoration: none;">
+    				<img src="images/fb1.jpeg" width="45px" height="45px">
+    			</a>
+    			<a href="https://www.twitter.com">
+    				<img src="images/tw.png" width="45px" height="45px" style="margin-left: 30px;text-decoration: none;">
+    			</a>
+    			
+    		
+    		</div>
+    		
+    	</div>
+			    	
+
+    </div>
+     <fieldset style="margin: none;">
+        <form id="myform" action="#" onsubmit="return check()" >
+        <div class="left-div"><h1>Message us</h1>
+
+        <label>Name</label><br>
+        <input type="text" id="name" placeholder="Enter name" autocomplete="off"><br>
+        <span id="fillname"></span><br>
+        <label>Telephone</label><br>
+        <input type="text" id="telephone" placeholder="Enter telephone number" autocomplete="off"><br>
+        <span id="filltelephone" ></span><br>
+        <label>E-mail</label><br>
+        <input type="text" id="email" placeholder="Enter e-mail" autocomplete="off"><br>
+        <span id="fillemail" ></span><br>
+        <label>Subject</label><br>
+        <input type="text" id="subject" placeholder="Enter subject" autocomplete="off"><br>
+        <span id="fillsubject" ></span><br>
+        <label>Message</label><br>
+        <textarea type="text" id="message" rows="5" placeholder="Enter message"></textarea><br>
+        <span id="fillmessage" ></span><br>
+        <button onclick="save()" type="submit" name="submit" >Submit</button>
+      </form>
+       
+        </div>
+        
+        
+
+
+        <div class="right-div">
+          <h1>Thank you,<br>
+           for messaging us!
+              </h1>
+        </div>
+        <div class="posta">
+          <canvas id="mycanvas" width="200" height="120"  style="border:3px solid #c3c3c3;
+          margin-left: 24%;
+          margin-top: 80px;">
+              Canvas nuk perkrahet nga browseri juaj.
+          </canvas>  
+          <script>
+
+            var c = document.getElementById("mycanvas");
+            var ctx = c.getContext("2d");
+            
+            ctx.font = "Arial 20px";
+            ctx.fillStyle ="#FFEEFF";
+           
+            ctx.moveTo(0,0);
+            ctx.lineTo(100,50);  
+            ctx.lineTo(200,0); 
+            ctx.stroke(); 
+            ctx.strokeText("To: Miami School",10,100);
+            ctx.strokeText("Miami",10,110);
+            
+            
+          </script>
+        </div>
+
+      </fieldset>
+      <script>
+        window.onscroll = function() {myFunction()};
+        
+        var navbar = document.getElementById("header");
+        var sticky = navbar.offsetTop;
+        
+        function myFunction() {
+          if (window.pageYOffset >= sticky) {
+            navbar.classList.add("sticky")
+          } else {
+            navbar.classList.remove("sticky");
+          }
+        }
+        </script>
+
+    <footer>
+			<div style="float: left;margin-left: 20px;margin-top: 15px;">				
+				Copyright &#169; 2013 Domain Name - All rights Reserved
+			</div>
+			<div style="float: right; margin-right: 20px; margin-top: 15px;">
+					Template by OS Templates
+			</div>			
+		</footer>
+
+
+</body>
+</html>
