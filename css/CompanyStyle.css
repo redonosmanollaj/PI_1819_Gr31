@@ -1,0 +1,205 @@
+/*Fillimi i navbar*/
+
+#header{
+  background-color: rgb(141, 25, 25);
+  margin-top: 5px;
+    height: 80px;
+    color: white;
+   }
+.logo{
+ font-size: 40px;  
+  font-family: Sans-serif;
+  margin-top: 20px;
+  margin-left: 10px;}
+.hyperlink{
+  font-size: 20px;
+  float:left;
+  width: 25%;
+  margin-top: 30px;
+  color: hsl(0, 0%, 85%);
+  text-decoration: none;
+}
+.hyperlink:hover{
+    color: black;
+    text-decoration: overline;
+   }
+.posht{
+  font-family:sans-serif;
+  font-size: 10pt;
+  float: right;
+  width: 25%;
+  margin-top:-14px;
+}
+
+/*fillimi i div.video*/
+.section {
+  width: 70%;
+  margin-left: 18%;
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.section h1 {
+  text-align: center;
+  font-size: 6rem;
+  font-family: "Cookie";
+  padding: 20px;
+  margin: 15px;
+  z-index: 1;
+  opacity: 0.7;
+}
+
+.video-container {
+  position: static;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+/*Fillimi i contet*/
+.contentRow{
+  margin-top: 5px;
+  width: 97%;
+  height: 140px;
+  margin-left: 20px;
+}
+.first{
+  background-color: brown;
+  width: 21.3%;
+  height: 90px;
+  float: left;
+}
+.calloutButton{
+  background-color: brown;
+  color: #fff;
+  outline: 2px solid #fff;
+  padding: 27px 120px;
+  display: inline-block;
+  outline-offset: -2vh;
+  text-decoration: none;
+}
+.calloutButton:hover{
+  outline-offset: -3vh;
+  transition: all .3s ease;
+  color: black;
+  outline-color: black;
+}
+
+/*Pjesa tjeter*/
+#content{
+  width: 100%;
+  height: 500px;
+
+}
+.vija{
+  width: 97%; 
+  height: 4px; 
+  background-color: rgb(141, 25, 25);
+  margin-left: 20px;
+}
+.qelia{
+  width: 100%;
+  height: 350px;
+  margin-bottom: 30px;
+}
+.teksti{
+  width: 50%;
+  height: 200px;
+  float: left;
+  margin-left: 30px;
+  margin-top: 50px;
+}
+.fotoja{
+  float: left;
+  width: 42%;
+  margin-top: -9px;
+  margin-left: 85px;
+  height: 300px;
+  float: left;
+}
+.picture{
+  width: 97%; 
+  height: 100%;
+}
+#lastfix{
+  width: 97%;
+  height: 400px;
+}
+#wraper{
+  position:relative;
+  float: left;
+  width: 50%;
+  height: 100%;
+  margin-left: 7%;
+}
+#cube{
+    width:100%;
+    height:100%;
+    font-size:50px;
+    position:absolute;
+    text-align: center;
+    line-height:300px;
+    cursor: default;
+  }
+#cube div{ 
+    -webkit-transform-origin:50% 50% -150px;
+    -webkit-transition: -webkit-transform .3s linear; 
+    position:absolute;
+    background: #D9FFFD;
+    border:1px solid black;
+    width: 100%;
+    height: 100%;
+}
+#cube:hover #top{ 
+  -webkit-transform: perspective(1000px) translate3d(0,0,-150px) rotate3d(1,0,0,0);
+    z-index:1;
+    width: 100%;
+    height: 100%;
+}
+#cube:hover #front{ 
+  -webkit-transform: perspective(1000px) translate3d(0,0,-200px) rotate3d(1,0,0,-90deg);
+    z-index:0;
+    width: 100%;
+    height: 100%;
+}
+#cube #top{ 
+  -webkit-transform: perspective(1000px) translate3d(0,0,-200px) rotate3d(1,0,0,90deg);
+    z-index:0;
+    width: 100%;
+    height: 100%;
+}
+#cube #front{ 
+  -webkit-transform: perspective(1000px) translate3d(0,0,-150px) rotate3d(1,0,0,0);
+    z-index:1;
+    width: 100%;
+    height: 100%;
+}
+#colonat{
+  float: left;
+  width: 42%;
+  height: 100%;
+}
+.photo{
+  width: 47%;
+  height: 201px;
+  margin-left: 1px;
+  float: left;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  background-image: linear-gradient(white, lightblue);
+}
+.scroll{
+  overflow: auto;
+}
+footer{
+  margin-top: 2px;
+  background-color: rgb(51,0,0);
+  color: rgb(193, 193, 193);
+  font-family: sans-serif;
+  height: 45px;
+  font-size: small;
+}
