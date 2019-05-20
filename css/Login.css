@@ -42,3 +42,6 @@
     color: rgb(193, 193, 193);
     font-family: fantasy;
 }
+body {
+    background-color: rgba(153, 250, 231, 0.883);
+}
