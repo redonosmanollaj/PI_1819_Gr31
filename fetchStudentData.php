@@ -29,7 +29,7 @@ if(isset($_SESSION['credentialsEntered'])) {
 
         <?php
         //lidhja me databaz
-        require_once('mysqli_connect.php');
+        require_once('dbconfig.php');
         
         //fshirja pi databaze nese butoni esht kliku
         if(isset($_POST['student_id'])) {

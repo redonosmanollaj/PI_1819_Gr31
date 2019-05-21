@@ -347,11 +347,11 @@ if(isset($_POST['erase']) or (empty($data_missing))){
 <body>
 
 
-<form action="addStudent.php" method="post">
+
 <table align="center" cellspacing = "8">
 <tr><td align>
-<input type="submit" name="go" class="redirectButton" value="View Students" /></td></tr>
-</form>
+<a href="Login.php"><input type="submit" name="go" class="redirectButton" value="View Students" /></a></td></tr>
+
 </table>
 
 <div id="studentWrapper">
