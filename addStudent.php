@@ -246,19 +246,22 @@ if(isset($_POST['submit'])){
 
     // add to database nese fushat jane te mbushura
     if(empty($data_missing)){
+        
         require_once('dbconfig.php');
 
-        $query = "INSERT INTO students (first_name,last_name,email,street_name,city,country,phone,d_day,d_month,d_year,gender,student_id)
-        VALUES(?,?,?,?,?,?,?,?,?,NULL)";
+
+
+        $query = "INSERT INTO students (first_name,last_name,email,street_name,city,country,phone,d_day,d_month,d_year,gender)
+        VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
         $statement = $conn->prepare($query);
-        $statement->bind_param("ssssssiiiisi",$first_name,$last_name,$email,$street_name,$city,$country,$phone,$day,$month,$year,$gender);
+        $statement->bind_param("sssssssiiis",$first_name,$last_name,$email,$street_name,$city,$country,$phone,$day,$month,$year,$gender);
 
         $statement->execute();
 
-        $rows = $statement->affected_rows();
+        $rows = $statement->affected_rows;
 
-        if($rows == 1){
+        if($rows > 0){
             alert("Student added successfuly!");
         }
         else{
@@ -358,6 +361,9 @@ if(isset($_POST['erase']) or (empty($data_missing))){
 <div id = "title">
 <h1>Add a New Student:</h1>
 </div>
+
+<form action="addStudent.php" method="post">
+
 
 <table align="center"
 cellspacing="8">
