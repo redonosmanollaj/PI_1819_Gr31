@@ -10,7 +10,7 @@ if(isset($_SESSION['credentialsEntered'])) {
 ?>
 <html>
     <head>
-        <link rel="stylesheet icon" type="text/css" href="">
+        <link rel='stylesheet icon' type='text/css' href='https://fonts.googleapis.com/css?family=Nothing+You+Could+Do'>
         <title>Fetch Student Data</title>
         <!-- CSS/foto ... -->
 
