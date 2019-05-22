@@ -1,7 +1,7 @@
 <?php
 
 
-if(session_start() == PHP_SESSION_NONE) {
+if(session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
@@ -10,7 +10,7 @@ if(isset($_SESSION['credentialsEntered'])) {
 ?>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css">
+        <link rel="stylesheet icon" type="text/css" href="">
         <title>Fetch Student Data</title>
         <!-- CSS/foto ... -->
 
@@ -125,9 +125,9 @@ if(isset($_SESSION['credentialsEntered'])) {
 
 
 
-                }
-        }
+                
+        
 
     </body>
 </html>
-    }
+    
