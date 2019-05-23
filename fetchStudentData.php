@@ -1,14 +1,4 @@
-<?php
 
-//	nese sesioni ska fillu
-if (session_status() == PHP_SESSION_NONE) {
-// fillo sesionin
-    session_start();
-}
-
-//parandalimi i qasjes direkte ne databaz pa u logirat
-if (isset($_SESSION['credentialsEntered'])) {
-?>
 
     <html>
     <head>
@@ -36,6 +26,12 @@ if (isset($_SESSION['credentialsEntered'])) {
 <?php
 // konektimi me databaz
 require_once('dbconfig.php');
+
+require_once('dbconfig.php');
+$conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME);
+if(!$conn){
+    die("Connection failed".mysqli_connect_error);
+}  
 
 //	fshrija e te dhenes specifike nga databaza kur te klikohet butoni
 
@@ -72,8 +68,8 @@ if (isset($_POST['student_id'])) {
 <?php
 
 //	Krijimi i queryt per databaz
-$query = "SELECT first_name, last_name, gender, email, street_name, city,
-phone,d_day, d_month, d_year, student_id FROM students ORDER BY last_name, first_name";
+$query = "SELECT first_name, last_name, email, street_name, city,country,
+phone,d_day, d_month, d_year,gender, student_id FROM students ORDER BY student_id,first_name, last_name";
 
 // Marrja e pergjigjes nga databaza duke derguar lidhjen dhe queryn
 $response = @mysqli_query($conn, $query);
@@ -87,26 +83,31 @@ if($response){
 
     echo '<table class = "studentinfo" align="center" cellpadding="8">
 
-    <tr><td align="left"><font face = "Architects Daughter" size="3"><b>Last Name</b></font></td>
+    <tr><td align="left"><font face = "Architects Daughter" size="3"><b>Id</b></font></td>
     <td align="left"><font face = "Architects Daughter" size="3"><b>First Name</b></font></td>
-    <td align="left"><font face = "Architects Daughter" size="3"><b>Gender</b></font></td>
+    <td align="left"><font face = "Architects Daughter" size="3"><b>Last Name</b></font></td>
     <td align="left"><font face = "Architects Daughter" size="3"><b>Email</b></font></td>
     <td align="left"><font face = "Architects Daughter" size="3"><b>Street</b></font></td>
     <td align="left"><font face = "Architects Daughter" size="3"><b>City</b></font></td>
+    <td align="left"><font face = "Architects Daughter" size="3"><b>Country</b></font></td>
     <td align="left"><font face = "Architects Daughter" size="3"><b>Phone</b></font></td>
-    <td align="left"><font face = "Architects Daughter" size="3"><b>Birth Date</b></font></td>';
+    <td align="left"><font face = "Architects Daughter" size="3"><b>Birth Date</b></font></td>
+    <td align="left"><font face = "Architects Daughter" size="3"><b>Gender</b></font></td>';
+
 
     // Kthe nje rresht te te dhenave nga query derisa t'mos ket te dhena tjera
     while($row = mysqli_fetch_array($response)){
         echo '<tr><td align="left">' . 
-        $row['last_name'] . '</td><td align="left">' . 
-        $row['first_name'] . '</td><td align="left">' .
-        $row['gender'] . '</td><td align="left">' .
-        $row['email'] . '</td><td align="left">' . 
-        $row['street_name'] . '</td><td align="left">' .
-        $row['city'] . '</td><td align="left">' . 
+        $row['student_id'] . '</td><td align="left">' . 
+        $row['first_name'] . '</td><td align="left">' . 
+        $row['last_name'] . '</td><td align="left">' .
+        $row['email'] . '</td><td align="left">' .
+        $row['street_name'] . '</td><td align="left">' . 
+        $row['city'] . '</td><td align="left">' .
+        $row['country'] . '</td><td align="left">' . 
         $row['phone'] . '</td><td align="left">' .
         $row['d_month'] ." ".$row['d_day'] .", ".$row['d_year'] .'</td><td align="left">';
+        $row['gender'] . '</td><td align="left">';
         ?>
 
         <!-- eventat ne form qendrojn ne faqe -->
@@ -130,13 +131,6 @@ else {
 
 // mbyllja e konektimit me databaz
 mysqli_close($conn);
-}
-//	nese var e sesionit nuk vendoset
-else
-{
-	//	useri/admini duhet mu logirat per me kqyr databazen
-	require_once('Login.php');
-}
 ?>
 </body>
 </html>

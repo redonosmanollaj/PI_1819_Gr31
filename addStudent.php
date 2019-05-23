@@ -362,7 +362,7 @@ if(isset($_POST['erase']) or (empty($data_missing))){
 
 <table align="center" cellspacing = "8">
 <tr><td align>
-<a href="Login.php"><input type="submit" name="go" class="redirectButton" value="View Students" /></a></td></tr>
+<a href="fetchStudentData.php"><input type="submit" name="go" class="redirectButton" value="View Students" /></a></td></tr>
 
 </table>
 
