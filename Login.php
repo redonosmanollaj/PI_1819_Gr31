@@ -7,8 +7,12 @@ if(session_status()== PHP_SESSION_NONE){
     session_start();
 }
 
+function get_post($conn,$var){
+    return $conn->real_escape_string($_POST[$var]);
+}
+
 if(isset($_SESSION['credentialsEntered'])){
-    require_once('addStudent.php');
+    require_once('fetchStudentData.php');
 }
 else{
 ?>
@@ -20,38 +24,40 @@ else{
 
 <?php
     require_once('dbconfig.php');
-    $conn = new mysqli(HOST,USERNAME,PASSWORD,DBNAME)
-    or die('Could not connect to database!'."<br>".$conn->connect_error());
+    $conn = new mysqli(HOST,USERNAME,PASSWORD,DBNAME);
+
+    if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+    }
 
     $incorrectError = "";
-    function signIn($conn){
-        if(!empty($_POST['username']) and !empty($_POST['password'])){
-            $username = $_POST['username'];
-            $password = $_POST['password'];
+    if(isset($_POST['submit'])){
+        if(!empty($_POST['username']) AND !empty($_POST['password'])){
+            $username = get_post($conn,'username');
+            $password = get_post($conn,'password');
 
-            $query = "select * from users where username = ? and password = ?";
-            $statement = $conn->prepare($query);
-            $statement->bind_param("ss",$username,$password);
-            $statement->execute();
+            $query = "select * from users where username = '$username' and password = '$password';";
 
-            $rows = $statement->affected_rows;
+            $result = $conn->query($query);
+            $rows = $result->num_rows;
+
             if($rows==1){
                 $incorrectError = "";
                 $_SESSION['credentialsEntered']==true;
+               header('Location: fetchStudentData.php');
             }
             else{
                 $incorrectError = "* Username or password are incorrect!";
             }
+
+            $conn->close();
         }
         else{
             $incorrectError = "* Username or password are missing!";
         }
+    
     }
 
-
-if(isset($_POST['submit'])){
-    signIn($conn);
-}
 ?>
 
 <body>
@@ -64,7 +70,7 @@ if(isset($_POST['submit'])){
             <input type="text" name="username" class="input">
             <p class="text" >Fjalekalimi</p>
             <input type="password" name="password" class="input">
-            <button class="hyrja" type="submit" name="submit">Hyrja</button>
+            <input type="submit" class="hyrja" name="submit" value="Hyrja">
             <br><br>
             <p><?php echo $incorrectError?></p>
             </form>

@@ -249,23 +249,32 @@ if(isset($_POST['submit'])){
         
         require_once('dbconfig.php');
 
+        $conn = new mysqli(HOST,USERNAME,PASSWORD,DBNAME);
+
+    if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+    }
 
 
         $query = "INSERT INTO students (first_name,last_name,email,street_name,city,country,phone,d_day,d_month,d_year,gender)
         VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
         $statement = $conn->prepare($query);
-        $statement->bind_param("sssssssiiis",$first_name,$last_name,$email,$street_name,$city,$country,$phone,$day,$month,$year,$gender);
+        $statement->bind_param("sssssssisis",$first_name,$last_name,$email,$street_name,$city,$country,$phone,$day,$month,$year,$gender);
 
         $statement->execute();
 
         $rows = $statement->affected_rows;
 
-        if($rows > 0){
-            alert("Student added successfuly!");
+        if($rows == 1){
+            echo '<script type="text/javascript">';
+            echo 'alert("Student added successfuly!")';
+            echo '</script>';
         }
         else{
-            alert("Student added failed! ".$conn->error());
+            echo '<script type="text/javascript">';
+            echo 'alert("Student added failed! ".$conn->error())';
+            echo '</script>';
         }
 
         $statement->close();
@@ -400,6 +409,11 @@ cellspacing="8">
 <tr><td align="left"><p><font face = "Arial" size="4"><b>City</b></font></td>
 <td align ="left"><input type="text" name="city" value = "<?php echo $city; ?>" size="30" maxlength="30" class = "inputs" /></p></td>
 <td align = "middle"> <font face = "Arial" size="4" color="red"><?php echo $cityError ?></font> </td></tr>
+
+<!-- Country, with error message -->
+<tr><td align="left"><p><font face = "Arial" size="4"><b>Country</b></font></td>
+<td align ="left"><input type="text" name="country" value = "<?php echo $country; ?>" size="30" maxlength="30" class = "inputs" /></p></td>
+<td align = "middle"> <font face = "Arial" size="4" color="red"><?php echo $countryError ?></font> </td></tr>
 
 
 
