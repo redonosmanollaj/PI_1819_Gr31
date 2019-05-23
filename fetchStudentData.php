@@ -18,9 +18,13 @@
         <td align>
         <form action="./addStudent.php" method="post">
             <input type="submit" name="go"  class="redirectButton" value="Add Student to Database" />
+            <a href="index.html"><input type="button" name="go"  class="redirectButton" value="Log Out" /></a>
+
+        </form>
         </td>
     </tr>
-        </form>
+        
+
     </table>
 
 <?php
@@ -61,8 +65,8 @@ if (isset($_POST['student_id'])) {
 ?>
 
 <div id = "title">
+    <img src="./images/miamilogo.png" alt="Banner" style="width:600px;height:300px;"/>
     <h1>Student Information Database:</h1>
-    <img src="./pictures/header.png" alt="Banner" style="width:600px;height:100px;"/>
 </div>
 
 <?php
@@ -106,7 +110,7 @@ if($response){
         $row['city'] . '</td><td align="left">' .
         $row['country'] . '</td><td align="left">' . 
         $row['phone'] . '</td><td align="left">' .
-        $row['d_month'] ." ".$row['d_day'] .", ".$row['d_year'] .'</td><td align="left">';
+        $row['d_month'] ." ".$row['d_day'] .", ".$row['d_year'] .'</td><td align="left">'.
         $row['gender'] . '</td><td align="left">';
         ?>
 

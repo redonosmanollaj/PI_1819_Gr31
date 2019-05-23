@@ -122,15 +122,15 @@
 			<br>
 			<br>
 			<br>
-			<form id="myFrom">
+			<form id="myFrom" action="messages.php" method="post">
 				<input class="fund" type="text" name="emri"  placeholder="Write your name" autocomplete="off">
 				<input class="fund" type="text" name="email" id="email"  placeholder="Write your email" autocomplete="off">
 				<br>
 				<div class="fund" style="margin-left: 10px;">
 					Message:
 				<br>
-				<textarea style="width: 98%; height: 100px;"  placeholder="What's on your mind?" autocomplete="off"></textarea>
-				<button type="submit" value="submit" id="validate" onclick="validate()">Submit</button>
+				<textarea style="width: 98%; height: 100px;" name="content"  placeholder="What's on your mind?" autocomplete="off"></textarea>
+				<input type="submit" value="submit" id="validate" name="submit" value="Submit">
 				<button type="reset" value="reset" style="margin-left: 10px;" onclick="clickCounter()">Reset</button>
 			</form>
 				<p id="result"></p>
@@ -257,7 +257,6 @@
           $result.text(email + " is not valid");
           $result.css("color", "red");
         }
-        return false;
       }
 
       $("#validate").bind("click", validate);
