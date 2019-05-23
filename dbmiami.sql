@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS students (
   country varchar(2) DEFAULT NULL,
   phone varchar(20) NOT NULL,
   d_day int(11) NOT NULL,
-  d_month varchar(10) NOT NULL,
+  d_month enum(10) NOT NULL,
   d_year int(11) NOT NULL,
   gender enum('M','F') NOT NULL,
   date_entered timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -30,11 +30,16 @@ alter table students modify country varchar(30);
 
 alter table students auto_increment = 101;
 alter table students modify gender char(1);
+alter table students modify d_month char(3);
     
 insert into Users(username,password,role) values('admin','admin','admin')
     
 select * from Users
 select * from students
+
+
+delete from students
+truncate table students
 
 delete from students where student_id=101
 
