@@ -48,3 +48,16 @@ INSERT INTO students(first_name,last_name,email,street_name,city,country,phone,d
 select * from users
 where username='admin' and password='admin'
 
+
+create table Messages(
+	messageid int auto_increment,
+    name varchar(20) not null,
+    email varchar(20) not null,
+    content varchar(1024),
+    primary key(messageid))
+    
+    
+select * from Messages
+    
+    
+
