@@ -31,11 +31,13 @@ alter table students modify country varchar(30);
 alter table students auto_increment = 101;
 alter table students modify gender char(1);
 alter table students modify d_month char(3);
+alter table users modify password varchar(255);
     
 insert into Users(username,password,role) values('admin','admin','admin')
     
 select * from Users
-select * from students
+select * from studentsusers
+SELECT student_id FROM students where student_id = (select max(student_id) from students)
 
 
 delete from students
@@ -47,6 +49,7 @@ INSERT INTO students(first_name,last_name,email,street_name,city,country,phone,d
 
 select * from users
 where username='admin' and password='admin'
+
 
 
 create table Messages(
