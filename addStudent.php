@@ -277,6 +277,27 @@ if(isset($_POST['submit'])){
             echo '</script>';
         }
 
+        $query = "INSERT INTO users(username,password,role) values (?,?,?)";
+        $idQuery = "SELECT student_id FROM students where student_id = (select max(student_id) from students)";
+        
+        $result = $conn->query($idQuery);
+        $row = $result->fetch_array();
+        $id = $row['student_id'];
+
+        $phoneQuery = "SELECT phone FROM students WHERE student_id=$id";
+        $result = $conn->query($phoneQuery);
+        $row = $result->fetch_array();
+        $phone = $row['phone'];
+
+        $role = "student";
+
+        $hash = password_hash($phone,PASSWORD_DEFAULT);
+
+        $statement = $conn->prepare($query);
+        $statement->bind_param("iss",$id,$hash,$role);
+
+        $statement->execute();
+
         $statement->close();
         $conn->close();
 

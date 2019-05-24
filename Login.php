@@ -3,6 +3,7 @@
 
 <?php
 
+
 if(session_status()== PHP_SESSION_NONE){
     session_start();
 }
@@ -36,15 +37,33 @@ else{
             $username = get_post($conn,'username');
             $password = get_post($conn,'password');
 
-            $query = "select * from users where username = '$username' and password = '$password';";
+
+            $query = "select * from users where username = '$username';";
 
             $result = $conn->query($query);
-            $rows = $result->num_rows;
+            $row = $result->fetch_array();
+            $hashPw = $row['password'];
+            $rows=$result->num_rows;
 
-            if($rows==1){
+            $roleQuery = "select role from users where username='$username'";
+            $result = $conn->query($query);
+            $row = $result->fetch_array();
+            $role = $row['role'];
+
+            if($rows==1 && $role=='admin' && password_verify($password,$hashPw)){
                 $incorrectError = "";
                 $_SESSION['credentialsEntered']==true;
                header('Location: fetchStudentData.php');
+
+            }
+            else if($rows==1 && $role='student' && password_verify($password,$hashPw)){
+
+                echo '<script type="text/javascript">';
+                echo 'alert("Jeni kyqur si student!")';
+                echo '</script>';
+                $_SESSION['id'] = $username;
+                $_SESSION['password'] = $password;
+                header('Location: studentet.php');
             }
             else{
                 $incorrectError = "* Username or password are incorrect!";
