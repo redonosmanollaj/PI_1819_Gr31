@@ -18,8 +18,8 @@
         <td align>
         <form action="./addStudent.php" method="post">
             <input type="submit" name="go"  class="redirectButton" value="Add Student to Database" />
+            <a href="fetchMessages.php"><input type="button" name="go"  class="redirectButton" value="View Messages" /></a>
             <a href="index.html"><input type="button" name="go"  class="redirectButton" value="Log Out" /></a>
-
         </form>
         </td>
     </tr>

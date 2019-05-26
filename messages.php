@@ -10,7 +10,7 @@ if(isset($_POST['submit'])){
       die("Connection failed: " . $conn->connect_error);
     }
 
-      $query = "insert into messages  values(?,?,?);";
+      $query = "insert into messages(name,email,content) values(?,?,?);";
 
       $name = $_POST['emri'];
       $email = $_POST['email'];
@@ -30,7 +30,7 @@ if(isset($_POST['submit'])){
       }
       else{
         echo '<script type="text/javascript">';
-        echo 'alert("Message has not sent! ".$conn->error())';
+        echo 'alert("Message has not sent! ")';
         echo '</script>';
       }
 
@@ -38,5 +38,10 @@ if(isset($_POST['submit'])){
       $conn->close();
 
 }
-
 ?>
+
+<html>
+  <body>
+    <a href="index.html">Go Back</a>
+  </body>
+</html>

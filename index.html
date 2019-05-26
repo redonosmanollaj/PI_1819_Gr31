@@ -124,13 +124,13 @@
 			<br>
 			<form id="myFrom" action="messages.php" method="post">
 				<input class="fund" type="text" name="emri"  placeholder="Write your name" autocomplete="off">
-				<input class="fund" type="text" name="email" id="email"  placeholder="Write your email" autocomplete="off">
+				<input class="fund" type="text" name="email" id=""  placeholder="Write your email" autocomplete="off">
 				<br>
 				<div class="fund" style="margin-left: 10px;">
 					Message:
 				<br>
-				<textarea style="width: 98%; height: 100px;" name="content"  placeholder="What's on your mind?" autocomplete="off"></textarea>
-				<input type="submit" value="submit" id="validate" name="submit" value="Submit">
+				<textarea style="width: 98%; height: 100px;" name="content"  placeholder="What's on your mind...." autocomplete="off"></textarea>
+				<button type="submit" value="submit" style="margin-left: 10px;" name="submit">Submit</button>
 				<button type="reset" value="reset" style="margin-left: 10px;" onclick="clickCounter()">Reset</button>
 			</form>
 				<p id="result"></p>
@@ -197,81 +197,81 @@
 						
 		</footer>
 	<script>
-		if (typeof(Storage) !== "undefined") {
-		  document.getElementById("email_join").value = localStorage.getItem("emailJoin");
-		} else {
-		  document.getElementById("email_join").value = "Sorry, your browser does not support Web Storage...";
-		}
-		function validateEmail(email_join) {
-		  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-		  return re.test(email_join);
-		}
+		// if (typeof(Storage) !== "undefined") {
+		//   document.getElementById("email_join").value = localStorage.getItem("emailJoin");
+		// } else {
+		//   document.getElementById("email_join").value = "Sorry, your browser does not support Web Storage...";
+		// }
+		// function validateEmail(email_join) {
+		//   var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		//   return re.test(email_join);
+		// }
 
-		function setSession() {
-			var $result = $("#message_error");
-			var email_join = $("#email_join").val();
-			$result.text("");
+		// function setSession() {
+		// 	var $result = $("#message_error");
+		// 	var email_join = $("#email_join").val();
+		// 	$result.text("");
 
-			if (validateEmail(email_join)) {
-			   try {
-				localStorage.setItem("emailJoin", document.getElementById("email_join").value);
-				alert("Thank you for join us");
-				}
-				catch(error){
-					document.getElementById("message_error").innerHTML = error.message;
-				}
-			} else {
-			   $result.text(email_join + " is not valid");
-			   $result.css("color", "red");
-			}
-			return false;
-		}
+		// 	if (validateEmail(email_join)) {
+		// 	   try {
+		// 		localStorage.setItem("emailJoin", document.getElementById("email_join").value);
+		// 		alert("Thank you for join us");
+		// 		}
+		// 		catch(error){
+		// 			document.getElementById("message_error").innerHTML = error.message;
+		// 		}
+		// 	} else {
+		// 	   $result.text(email_join + " is not valid");
+		// 	   $result.css("color", "red");
+		// 	}
+		// 	return false;
+		// }
 
-      function validateEmail(email) {
-        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email);
-      }
+      // function validateEmail(email) {
+      //   var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      //   return re.test(email);
+      // }
 
-      function clickCounter() {
-		  if (typeof(Storage) !== "undefined") {
-		    if (sessionStorage.clickcount) {
-		      sessionStorage.clickcount = Number(sessionStorage.clickcount)+1;
-		      document.getElementById("myForm").reset();
-		    } else {
-		      sessionStorage.clickcount = 1;
-		    }
-		    document.getElementById("result").innerHTML = "Keni klikuar " + sessionStorage.clickcount + " here butonin reset.";
-		  } else {
-		    document.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
-		  }
-		}
+    //   function clickCounter() {
+		//   if (typeof(Storage) !== "undefined") {
+		//     if (sessionStorage.clickcount) {
+		//       sessionStorage.clickcount = Number(sessionStorage.clickcount)+1;
+		//       document.getElementById("myForm").reset();
+		//     } else {
+		//       sessionStorage.clickcount = 1;
+		//     }
+		//     document.getElementById("result").innerHTML = "Keni klikuar " + sessionStorage.clickcount + " here butonin reset.";
+		//   } else {
+		//     document.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
+		//   }
+		// }
 
-      function validate() {
-        var $result = $("#result");
-        var email = $("#email").val();
-        $result.text("");
+      // function validate() {
+      //   var $result = $("#result");
+      //   var email = $("#email").val();
+      //   $result.text("");
 
-        if (validateEmail(email)) {
-        	alert("Thank you for texting us, we will answer soon!")
-        } else {
-          $result.text(email + " is not valid");
-          $result.css("color", "red");
-        }
-      }
+      //   if (validateEmail(email)) {
+      //   	alert("Thank you for texting us, we will answer soon!")
+      //   } else {
+      //     $result.text(email + " is not valid");
+      //     $result.css("color", "red");
+      //   }
+      // }
 
-      $("#validate").bind("click", validate);
-        window.onscroll = function() {myFunction()};
+      // $("#validate").bind("click", validate);
+      //   window.onscroll = function() {myFunction()};
         
-        var navbar = document.getElementById("header");
-        var sticky = navbar.offsetTop;
+      //   var navbar = document.getElementById("header");
+      //   var sticky = navbar.offsetTop;
         
-        function myFunction() {
-          if (window.pageYOffset >= sticky) {
-            navbar.classList.add("sticky")
-          } else {
-            navbar.classList.remove("sticky");
-          }
-        }
+      //   function myFunction() {
+      //     if (window.pageYOffset >= sticky) {
+      //       navbar.classList.add("sticky")
+      //     } else {
+      //       navbar.classList.remove("sticky");
+      //     }
+      //   }
         </script>
 </body>
 </html>
