@@ -46,7 +46,7 @@ else{
             $rows=$result->num_rows;
 
             $roleQuery = "select role from users where username='$username'";
-            $result = $conn->query($query);
+            $result = $conn->query($roleQuery);
             $row = $result->fetch_array();
             $role = $row['role'];
 
@@ -56,7 +56,7 @@ else{
                header('Location: fetchStudentData.php');
 
             }
-            else if($rows==1 && $role='student' && password_verify($password,$hashPw)){
+            else if($rows==1 && $role=='student' && password_verify($password,$hashPw)){
 
                 echo '<script type="text/javascript">';
                 echo 'alert("Jeni kyqur si student!")';
@@ -64,6 +64,11 @@ else{
                 $_SESSION['id'] = $username;
                 $_SESSION['password'] = $password;
                 header('Location: studentet.php');
+            }
+            else if($rows==1 && $role=='profesor' && password_verify($password,$hashPw)){
+                echo '<script type="text/javascript">';
+                echo 'alert("Jeni kyqur si profesor!")';
+                echo '</script>';
             }
             else{
                 $incorrectError = "* Username or password are incorrect!";
@@ -85,11 +90,11 @@ else{
             <a><img src="images/login.png" class="img"></a>
 
             <form action="Login.php" method="post">
-            <p class="text">Perdoruesi</p>
+            <p class="text">Username(id)</p>
             <input type="text" name="username" class="input">
-            <p class="text" >Fjalekalimi</p>
+            <p class="text" >Password</p>
             <input type="password" name="password" class="input">
-            <input type="submit" class="hyrja" name="submit" value="Hyrja">
+            <input type="submit" class="hyrja" name="submit" value="LogIn">
             <br><br>
             <p><?php echo $incorrectError?></p>
             </form>
