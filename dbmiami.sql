@@ -1,12 +1,12 @@
-create database dbmiami
-use dbmiami
+create database dbmiami;
+use dbmiami;
 
 create table Users(
 	userid int auto_increment,
     username varchar(20) unique,
     password varchar(20),
     role varchar(15),
-    primary key (userid))
+    primary key (userid));
     
 DROP TABLE IF EXISTS students
 CREATE TABLE IF NOT EXISTS students (
@@ -26,6 +26,71 @@ CREATE TABLE IF NOT EXISTS students (
   PRIMARY KEY (student_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8;
 
+create table Profesors(
+	profesor_id int auto_increment,
+    first_name varchar(30) not null,
+    last_name varchar(30) not null,
+    email varchar(60),
+    primary key(profesor_id));
+ALTER TABLE Profesors add phone varchar(20);
+    
+INSERT INTO Profesors(first_name,last_name,email) values('Ruzhdi','Sefa','ruzhdi.sefa@uni-pr.edu');
+
+create table Subjects(
+	subject_id int,
+    subject_name varchar(30) not null,
+    ects int,
+    primary key(subject_id));
+    
+alter table Subjects modify subject_name varchar(50);
+    
+INSERT INTO Subjects(subject_id,subject_name,ects) VALUES (001,'Mathematics 1',7);
+INSERT INTO Subjects(subject_id,subject_name,ects) VALUES (002,'Physics 1',6);
+INSERT INTO Subjects(subject_id,subject_name,ects) VALUES (003,'Foundamentals of Electrothechnics',7);
+INSERT INTO Subjects(subject_id,subject_name,ects) VALUES (004,'Programming Language',5);
+INSERT INTO Subjects(subject_id,subject_name,ects) VALUES (005,'English',5);
+INSERT INTO Subjects(subject_id,subject_name,ects) VALUES (006,'Electric Circuits',7);
+INSERT INTO Subjects(subject_id,subject_name,ects) VALUES (007,'Physiscs 2',6);
+INSERT INTO Subjects(subject_id,subject_name,ects) VALUES (008,'Mathematics 2',7);
+INSERT INTO Subjects(subject_id,subject_name,ects) VALUES (009,'Digital Circuits',5);
+INSERT INTO Subjects(subject_id,subject_name,ects) VALUES (010,'Algorithms',5);
+
+select * from subjects
+    
+    
+create table Teachs(
+	profesor_id int,
+    subject_id int,
+    primary key(profesor_id,subject_id),
+    foreign key(profesor_id) references Profesors(profesor_id),
+    foreign key(subject_id) references Subjects(subject_id));
+INSERT INTO Teachs(profesor_id,subject_id) VALUES(1,003);
+    
+create table Grades(
+	student_id int(10) unsigned,
+    subject_id int,
+    grade int,
+    primary key(student_id,subject_id),
+    foreign key(student_id) references Students(student_id),
+    foreign key(subject_id) references Subjects(subject_id));
+INSERT INTO Grades(student_id,subject_id,grade) values(19,003,9);
+INSERT INTO Grades(student_id,subject_id,grade) values(14,003,6);
+INSERT INTO Grades(student_id,subject_id,grade) values(18,003,10);
+
+
+
+        
+
+create table Messages(
+	messageid int auto_increment,
+    name varchar(20) not null,
+    email varchar(20) not null,
+    content varchar(1024),
+    primary key(messageid))
+    
+    
+    
+    
 alter table students modify country varchar(30);
 
 alter table students auto_increment = 101;
@@ -36,7 +101,7 @@ alter table users modify password varchar(255);
 insert into Users(username,password,role) values('admin','admin','admin')
     
 select * from Users
-select * from studentsusers
+select * from students
 SELECT student_id FROM students where student_id = (select max(student_id) from students)
 
 
@@ -48,19 +113,19 @@ delete from students where student_id=101
 INSERT INTO students(first_name,last_name,email,street_name,city,country,phone,d_day,d_month,d_year,gender) VALUES('Redon','Osmanollaj','redon_osmanollaj@gmail.com','Hasan Prishtina','Obiliq','Kosove','045257900',03,12,1999,'M')
 
 select * from users
-where username='admin' and password='admin'
-
-
-
-create table Messages(
-	messageid int auto_increment,
-    name varchar(20) not null,
-    email varchar(20) not null,
-    content varchar(1024),
-    primary key(messageid))
+where username='admin' and password='admin'    
     
-    
+
 select * from Messages
+alter table messages modify email varchar(50);
+delete from messages
+
+    
+SELECT S.subject_id, S.subject_name, P.first_name,P.last_name, S.ects, G.grade
+FROM Subjects S, Profesors P, Grades G, Students St, Teachs T
+where S.subject_id=G.subject_id and St.student_id = G.student_id and P.profesor_id=T.profesor_id and T.subject_id=S.subject_id
+and St.student_id = 18
     
     
+select * from profesors
 
