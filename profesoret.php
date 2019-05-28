@@ -2,6 +2,7 @@
 session_start();
 ?>
 
+
 <html>
     <head>
     <!-- Google fonts -->
@@ -9,7 +10,7 @@ session_start();
     <!-- CSS style sheets -->
     <link rel="StyleSheet" href="./css/registration-design.css" />
     <link rel="StyleSheet" href="./css/message-design.css" />
-    <title>Fetch Profesor's Data</title>
+    <title>Fetch Student Data</title>
     <link rel="shortcut icon" type="image/png" href="./pictures/westmount.png"/>
     </head>
     <body>
@@ -18,7 +19,7 @@ session_start();
     <table align="center" cellspacing = "8">
     <tr>
         <td align>
-        <form  method="post">
+        <form action="./addStudent.php" method="post">
             <a href="admin.php"><input type="button" name="go"  class="redirectButton" value="Home" /></a>
             <a href="index.html"><input type="button" name="go"  class="redirectButton" value="Log Out" /></a>
         </form>
@@ -40,17 +41,17 @@ if(!$conn){
 
 //	fshrija e te dhenes specifike nga databaza kur te klikohet butoni
 
-if (isset($_POST['profesor_id'])) {
-        $profesor_id = $_POST['profesor_id'];
+if (isset($_POST['student_id'])) {
+        $student_id = $_POST['student_id'];
         if (isset($_POST['delete'])) {
-            $sql = "DELETE FROM profesors WHERE profesor_id = " . $profesor_id;
+            $sql = "DELETE FROM students WHERE student_id = " . $student_id;
 			
 		    if (mysqli_query($conn, $sql))
 			{?>
 				<!-- Outputi pas fshirjes -->
 				<div class="isa_success">
 				<i class="fa fa-check"></i>
-					<?php echo "Profesor Deleted"; ?>
+					<?php echo "Student Deleted"; ?>
 				</div><?php
 			}
 			else
@@ -58,7 +59,7 @@ if (isset($_POST['profesor_id'])) {
 			{?>
 				<div class="isa_error">
 				<i class="fa fa-warning"></i>
-					<?php echo "Error Occurred ".mysqli_error($conn); ?>
+					<?php echo "Error Occurred ".mysqli_error($link); ?>
 				</div><?php
 			}
         }
@@ -67,13 +68,14 @@ if (isset($_POST['profesor_id'])) {
 
 <div id = "title">
     <img src="./images/miamilogo.png" alt="Banner" style="width:600px;height:300px;"/>
-    <h1>Profesor Information Database:</h1>
+    <h1>Grades of Students:</h1>
 </div>
 
 <?php
-
+//$profesor_id = $_SESSION['id'];
 //	Krijimi i queryt per databaz
-$query = "SELECT * FROM profesors ";
+$query = "SELECT first_name, last_name, email, street_name, city,country,
+phone,d_day, d_month, d_year,gender, student_id FROM students ORDER BY student_id,first_name, last_name";
 
 // Marrja e pergjigjes nga databaza duke derguar lidhjen dhe queryn
 $response = @mysqli_query($conn, $query);
@@ -84,65 +86,52 @@ if($response){
     $num_rows = mysqli_num_rows($response);
     echo "<p align='center'><font face = 'Architects Daughter' size='4pt'><i> * $num_rows records fetched! </i></font></p>";
 
+    $subjectsQuery = "select S.subject_id,S.subject_name
+            from Profesors P, Subjects S, Teachs T
+            where P.profesor_id=T.profesor_id and S.subject_id = T.subject_id and P.profesor_id=7";
+    $result = $conn->query($subjectsQuery);
+    while($row = $result->fetch_array()){
+        $subjectsArray[] = $row['subject_name'];
+        $subjectsIdArray[] = $row['subject_id'];
+    }
 
     echo '<table class = "studentinfo" align="center" cellpadding="8">
 
     <tr><td align="left"><font face = "Architects Daughter" size="3"><b>Id</b></font></td>
     <td align="left"><font face = "Architects Daughter" size="3"><b>First Name</b></font></td>
     <td align="left"><font face = "Architects Daughter" size="3"><b>Last Name</b></font></td>
-    <td align="left"><font face = "Architects Daughter" size="3"><b>Email</b></font></td>
-    <td align="left"><font face = "Architects Daughter" size="3"><b>Phone</b></font></td>
-    <td align="left"><font face = "Architects Daughter" size="3"><b>Subject 1</b></font></td>
-    <td align="left"><font face = "Architects Daughter" size="3"><b>Subject 2</b></font></td>
-    <td align="left"><font face = "Architects Daughter" size="3"><b>Subject 3</b></font></td>';
+    <td align="left"><font face = "Architects Daughter" size="3"><b>Email</b></font></td>';
+    foreach($subjectsArray as $subject){
+        echo "<td align='left'><font face = 'Architects Daughter' size='3'><b>$subject</b></font></td>";
+    }
 
-    $subjectQuery = "select *
-                    from Teachs T, Subjects S, Profesors P
-                    where T.profesor_id = P.profesor_id and T.subject_id = S.subject_id and P.profesor_id=?;";
+    $gradeQuery = "select *
+                from Grades
+                where student_id = ? and subject_id = ?;";
 
 
     // Kthe nje rresht te te dhenave nga query derisa t'mos ket te dhena tjera
     while($row = mysqli_fetch_array($response)){
         echo '<tr><td align="left">' . 
-        $row['profesor_id'] . '</td><td align="left">' . 
+        $row['student_id'] . '</td><td align="left">' . 
         $row['first_name'] . '</td><td align="left">' . 
         $row['last_name'] . '</td><td align="left">' .
-        $row['email'] . '</td><td align="left">' .
-        $row['phone'] . '</td>';
+        $row['email'] . '</td>' ;
 
-        $subjectStm = $conn->prepare($subjectQuery);
-        $subjectStm->bind_param("i",$row['profesor_id']);
-        $subjectStm->execute();
-        $subjectResult = $subjectStm->get_result();
-        // for($i=0;$i<3;$i++){
-        //     echo '<td align="left">'.$subjectRow['subject_name'].'</td>';
-        // }
-        $count = 0;
-        while($subjectRow = $subjectResult->fetch_array()){
-            $count++;
-            echo '<td align="left">'.$subjectRow['subject_name'].'</td>';
+        $gradeStm = $conn->prepare($gradeQuery);
+        for($i=0;$i<sizeof($subjectsArray);$i++){
+            $gradeStm->bind_param("ii",$row['student_id'],$subjectsIdArray[$i]);
+            $gradeStm->execute();
+            $gradeResult = $gradeStm->get_result();
+            $gradeRow = $gradeResult->fetch_array();
+            echo '<td align="center">'.$gradeRow['grade'].'</td>'; 
         }
-        if($count == 2){
-            echo '<td align="left">'.'</td>';
-        }
-
-        if($count == 1){
-            echo '<td align="left">'.'</td>';
-            echo '<td align="left">'.'</td>';
-        }
-
-        if($count == 0){
-            echo '<td align="left">'.'</td>';
-            echo '<td align="left">'.'</td>';
-            echo '<td align="left">'.'</td>';
-        }
-
         ?>
 
         <!-- eventat ne form qendrojn ne faqe -->
         <form method="post" action="">
             <!-- Butonai fshehur ruan id specifike te studentit -->
-            <td><input type="hidden" id = "student_id" name="profesor_id" value="<?php echo $row['profesor_id']; ?>" /></td>
+            <td><input type="hidden" id = "student_id" name="student_id" value="<?php echo $row['student_id']; ?>" /></td>
             <!-- butoni delete -->
             <td><input type="submit" name="delete" class="deleteButton" value="Delete" onclick="return confirm('Are you sure?')" /></td>
         </form>

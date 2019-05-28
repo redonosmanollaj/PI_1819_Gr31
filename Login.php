@@ -70,6 +70,7 @@ else{
                 echo '<script type="text/javascript">';
                 echo 'alert("Jeni kyqur si profesor!")';
                 echo '</script>';
+                header('Location: profesoret.php');
             }
             else{
                 $incorrectError = "* Username or password are incorrect!";
