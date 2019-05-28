@@ -20,8 +20,8 @@ session_start();
     <tr>
         <td align>
         <form action="./addStudent.php" method="post">
-            <a href="admin.php"><input type="button" name="go"  class="redirectButton" value="Home" /></a>
-            <a href="index.html"><input type="button" name="go"  class="redirectButton" value="Log Out" /></a>
+            <a href="changePassword.php"><input type="button" name="go"  class="redirectButton" value="Change Password" /></a>
+            <a href="logout.php"><input type="button" name="go"  class="redirectButton" value="Log Out" /></a>
         </form>
         </td>
     </tr>
@@ -39,31 +39,7 @@ if(!$conn){
     die("Connection failed".mysqli_connect_error);
 }  
 
-//	fshrija e te dhenes specifike nga databaza kur te klikohet butoni
 
-if (isset($_POST['student_id'])) {
-        $student_id = $_POST['student_id'];
-        if (isset($_POST['delete'])) {
-            $sql = "DELETE FROM students WHERE student_id = " . $student_id;
-			
-		    if (mysqli_query($conn, $sql))
-			{?>
-				<!-- Outputi pas fshirjes -->
-				<div class="isa_success">
-				<i class="fa fa-check"></i>
-					<?php echo "Student Deleted"; ?>
-				</div><?php
-			}
-			else
-				// Outputi nese ndodh naj gabim gjat fshirjes
-			{?>
-				<div class="isa_error">
-				<i class="fa fa-warning"></i>
-					<?php echo "Error Occurred ".mysqli_error($link); ?>
-				</div><?php
-			}
-        }
-    }
 ?>
 
 <div id = "title">
@@ -72,7 +48,7 @@ if (isset($_POST['student_id'])) {
 </div>
 
 <?php
-//$profesor_id = $_SESSION['id'];
+$profesor_id = $_SESSION['id'];
 //	Krijimi i queryt per databaz
 $query = "SELECT first_name, last_name, email, street_name, city,country,
 phone,d_day, d_month, d_year,gender, student_id FROM students ORDER BY student_id,first_name, last_name";
@@ -88,7 +64,7 @@ if($response){
 
     $subjectsQuery = "select S.subject_id,S.subject_name
             from Profesors P, Subjects S, Teachs T
-            where P.profesor_id=T.profesor_id and S.subject_id = T.subject_id and P.profesor_id=7";
+            where P.profesor_id=T.profesor_id and S.subject_id = T.subject_id and P.profesor_id=$profesor_id";
     $result = $conn->query($subjectsQuery);
     while($row = $result->fetch_array()){
         $subjectsArray[] = $row['subject_name'];
@@ -124,8 +100,18 @@ if($response){
             $gradeStm->execute();
             $gradeResult = $gradeStm->get_result();
             $gradeRow = $gradeResult->fetch_array();
-            echo '<td align="center">'.$gradeRow['grade'].'</td>'; 
+            if($gradeRow['grade']==null){
+                ?> <td align="center">
+                <form method="post" action="profesoret.php">
+                <input type="number" name="<?php echo $i?>" min="5" max="10" size="1">
+                </td>
+                </form>
+                <?php
+            }else{
+                echo '<td align="center">'.$gradeRow['grade'].'</td>';
+            }
         }
+
         ?>
 
         <!-- eventat ne form qendrojn ne faqe -->
@@ -133,13 +119,49 @@ if($response){
             <!-- Butonai fshehur ruan id specifike te studentit -->
             <td><input type="hidden" id = "student_id" name="student_id" value="<?php echo $row['student_id']; ?>" /></td>
             <!-- butoni delete -->
-            <td><input type="submit" name="delete" class="deleteButton" value="Delete" onclick="return confirm('Are you sure?')" /></td>
+            <td><input type="submit" name="rate" class="deleteButton" value="Rate" onclick="return confirm('Are you sure?')" /></td>
         </form>
 
         <?php
         echo '</tr>';
     }		
 echo '</table>';
+
+if (isset($_POST['student_id'])) {
+    $student_id = $_POST['student_id'];
+    if (isset($_POST['rate'])) {
+        $sql = "REPLACE INTO Grades(student_id,subject_id,grade) values(?,?,?)";
+        $stm = $conn->prepare($sql);
+        
+        for($i=0;$i<sizeof($subjectsArray);$i++){
+            $gradeString = "grade".$i;
+            $stm->bind_param("iii",$student_id,$subjectsIdArray[$i],$_POST[$i]);
+            $stm->execute();
+
+            $rows = $stm->affected_rows;
+            echo $rows;
+            if ($rows>0)
+            {?>
+                <!-- Outputi pas fshirjes -->
+                <div class="isa_success">
+                <i class="fa fa-check"></i>
+                    <?php echo "Student Rated"; ?>
+                </div><?php
+            }
+            else
+                // Outputi nese ndodh naj gabim gjat fshirjes
+            {?>
+                <div class="isa_error">
+                <i class="fa fa-warning"></i>
+                    <?php echo "Error Occurred ".mysqli_error($conn); ?>
+                </div><?php
+            }
+        }
+        
+
+    }
+}
+
 } 
 //	nese query nuk ekzekutohet si duhet
 else {

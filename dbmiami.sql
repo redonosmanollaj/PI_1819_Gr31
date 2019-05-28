@@ -77,8 +77,12 @@ create table Grades(
     
 
 INSERT INTO Grades(student_id,subject_id,grade) values(19,003,9);
+INSERT INTO Grades(student_id,subject_id,grade) values(19,006,6);
 INSERT INTO Grades(student_id,subject_id,grade) values(14,003,6);
 INSERT INTO Grades(student_id,subject_id,grade) values(18,003,10);
+
+INSERT INTO Grades(student_id,subject_id,grade) values(21,003,10);
+
 
 
 
@@ -127,17 +131,29 @@ delete from messages
 SELECT S.subject_id, S.subject_name, P.first_name,P.last_name, S.ects, G.grade
 FROM Subjects S, Profesors P, Grades G, Students St, Teachs T
 where S.subject_id=G.subject_id and St.student_id = G.student_id and P.profesor_id=T.profesor_id and T.subject_id=S.subject_id
-and St.student_id = 18
+and St.student_id = 19
     
     
 select * from profesors
 
 select *
 from Teachs T, Subjects S, Profesors P
-where T.profesor_id = P.profesor_id and T.subject_id = S.subject_id 
+where T.profesor_id = P.profesor_id and T.subject_id = S.subject_id;
 
 select * from subjects
 select * from teachs
+select * from grades
+
+-- lendet te cilat i jep profesori
+select S.subject_id,S.subject_name
+from Profesors P, Subjects S, Teachs T
+where P.profesor_id=T.profesor_id and S.subject_id = T.subject_id and P.profesor_id=7
+
+-- notat e studentit per e lendet e profesorit ne fjale
+select *
+from Grades
+where student_id = 19 and subject_id = 003;
+
 
 
 

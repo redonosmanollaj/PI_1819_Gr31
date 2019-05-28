@@ -21,7 +21,7 @@
             <a href="addProfesor.php"><input type="button" name="go"  class="redirectButton" value="Add Profesor" /></a>
             <a href="fetchProfesors.php"><input type="button" name="go"  class="redirectButton" value="View Profesors" /></a>
             <a href="fetchMessages.php"><input type="button" name="go"  class="redirectButton" value="View Messages" /></a>
-            <a href="index.html"><input type="button" name="go"  class="redirectButton" value="Log Out" /></a>
+            <a href="logout.php"><input type="button" name="go"  class="redirectButton" value="Log Out" /></a>
         </form>
         </td>
     </tr>

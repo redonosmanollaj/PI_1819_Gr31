@@ -21,7 +21,7 @@ session_start();
         <td align>
         <form action="./addStudent.php" method="post">
             <a href="changePassword.php"><input type="button" name="changePassword"  class="redirectButton" value="Change Password" /></a>
-            <a href="index.html"><input type="button" name="go"  class="redirectButton" value="Log Out" /></a>
+            <a href="logout.php"><input type="button" name="go"  class="redirectButton" value="Log Out" /></a>
 
         </form>
         </td>

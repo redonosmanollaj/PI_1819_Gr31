@@ -44,7 +44,7 @@ if(isset($_POST['submit'])){
                 echo '<script type="text/javascript">';
                 echo 'alert("The password has been changed.")';
                 echo '</script>';
-                header('Location: studentet.php');
+                header("Location: login.php");
             }
             else{
                 echo '<script type="text/javascript">';

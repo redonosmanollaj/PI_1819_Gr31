@@ -12,10 +12,7 @@ function get_post($conn,$var){
     return $conn->real_escape_string($_POST[$var]);
 }
 
-if(isset($_SESSION['credentialsEntered'])){
-    require_once('fetchStudentData.php');
-}
-else{
+
 ?>
 <html>
     <head>
@@ -52,7 +49,8 @@ else{
 
             if($rows==1 && $role=='admin' && password_verify($password,$hashPw)){
                 $incorrectError = "";
-                $_SESSION['credentialsEntered']==true;
+                $_SESSION['id'] = $username;
+                $_SESSION['password'] = $password;
                header('Location: admin.php');
 
             }
@@ -67,6 +65,7 @@ else{
             }
             else if($rows==1 && $role=='profesor' && password_verify($password,$hashPw)){
                 $_SESSION['id'] = $username;
+                $_SESSION['password'] = $password;
                 echo '<script type="text/javascript">';
                 echo 'alert("Jeni kyqur si profesor!")';
                 echo '</script>';
@@ -108,4 +107,3 @@ else{
     </body>
 </html>
 
-<?php } ?>
