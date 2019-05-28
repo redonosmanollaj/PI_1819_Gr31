@@ -15,8 +15,7 @@
     <tr>
         <td align>
         <form action="./addStudent.php" method="post">
-            <input type="submit" name="go"  class="redirectButton" value="Add Student to Database" />
-            <a href="fetchStudentData.php"><input type="button" name="go"  class="redirectButton" value="View Students" /></a>
+            <a href="admin.php"><input type="button" name="go"  class="redirectButton" value="Home" /></a>
             <a href="index.html"><input type="button" name="go"  class="redirectButton" value="Log Out" /></a>
         </form>
         </td>

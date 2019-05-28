@@ -33,6 +33,7 @@ function checkPhone($phone){
     return true;
 }
 
+$subjects = array("Mathematics 1","Physics 1","Foundamentals of Electrothechnics","Programming Language","English","Electric Circuits","Physiscs 2","Mathematics 2","Digital Circuits","Algorithms");
 
 
 if(isset($_POST['submit'])){
@@ -99,6 +100,28 @@ if(isset($_POST['submit'])){
         }
     }
 
+
+    if(!empty($_POST['subject1'])){
+        $subject1 = $_POST['subject1'];
+        $subject1Id = array_search($subject1,$subjects)+1;
+    }else{
+        $subject1Id=null;
+    }
+
+    if(!empty($_POST['subject2'])){
+        $subject2 = $_POST['subject2'];
+        $subject2Id = array_search($subject2,$subjects)+1;
+    }else{
+        $subject2Id = null;
+    }
+
+    if(!empty($_POST['subject3'])){
+        $subject3 = $_POST['subject3'];
+        $subject3Id = array_search($subject3,$subjects)+1;
+    }else{
+        $subject3Id = null;
+    }
+
         //validimi i numrit te telefonit
 
         if(empty($_POST['phone'])){
@@ -118,6 +141,7 @@ if(isset($_POST['submit'])){
                 $phoneError = '* Error: '.$e->getMessage()."<br><br>";
             }
         }
+
 
     // add to database nese fushat jane te mbushura
     if(empty($data_missing)){
@@ -173,6 +197,16 @@ if(isset($_POST['submit'])){
 
         $statement->execute();
 
+        // INSERT per insertimin e lendes
+
+        $subjectQuery = "INSERT INTO Teachs(profesor_id,subject_id) VALUES($id,?);";
+        $stm = $conn->prepare($subjectQuery);
+        for($i=1;$i<=3;$i++){
+            $stm->bind_param("i",${"subject$i"."Id"});
+            $stm->execute();
+        }
+
+        $stm->close();
         $statement->close();
         $conn->close();
 
@@ -190,6 +224,15 @@ if(isset($_POST['submit'])){
         if(!isset($phone)){
             $phone="";
         }
+        if(!isset($subject1)){
+            $phone="";
+        }
+        if(!isset($subject2)){
+            $phone="";
+        }
+        if(!isset($subject3)){
+            $phone="";
+        }
     }
 }
 
@@ -198,6 +241,9 @@ if(isset($_POST['erase']) or (empty($data_missing))){
     $last_name="";
     $email="";
     $phone="";
+    $subject1="";
+    $subject2="";
+    $subject3="";
 
 
 
@@ -205,7 +251,9 @@ if(isset($_POST['erase']) or (empty($data_missing))){
     $lastNameError="";
     $emailError="";
     $phoneError="";
-
+    $subject1Error="";
+    $subject2Error="";
+    $subject3Error="";
 }
 ?>
 
@@ -226,8 +274,8 @@ if(isset($_POST['erase']) or (empty($data_missing))){
 
 <table align="center" cellspacing = "8">
 <tr><td align>
-<a href="fetchStudentData.php"><input type="submit" name="go" class="redirectButton" value="View Students" /></a></td></tr>
-
+    <a href="admin.php"><input type="button" name="go"  class="redirectButton" value="Home" /></a>
+    <a href="index.html"><input type="button" name="go"  class="redirectButton" value="Log Out" /></a>
 </table>
 
 <div id="studentWrapper">
@@ -259,6 +307,57 @@ cellspacing="8">
 <tr><td align="left"><p><font face = "Arial" size="4"><b>Phone Number:</b></font></td>
 <td align ="left"><input type="text" name="phone" size="30" value = "<?php echo $phone; ?>" maxlength = "14" value="" class = "inputs" /></p></td>
 <td align = "middle"> <font face = "Arial" size="4" color="red"><?php echo $phoneError ?></font> </td> </tr></tr>
+
+
+<tr><td align="left"><p>
+    <font face = "Arial" size="4"><b><label for= "course"> Subject 1:</label></b></font></td>
+<td align ="left"><select name="subject1" class = "inputs">
+	
+	<option value=""></option>
+	<option value = "" disabled> - Subject 1 - </option>
+<?php
+
+foreach($subjects as $subject){
+    ?><option value="<?php echo $subject; ?>"><?php echo $subject; ?></option><?php
+}
+
+?>
+</select>
+</tr>
+
+
+<tr><td align="left"><p>
+    <font face = "Arial" size="4"><b><label for= "course"> Subject 2:</label></b></font></td>
+<td align ="left"><select name="subject2" class = "inputs">
+	
+	<option value=""></option>
+	<option value = "" disabled> - Subject 2 - </option>
+<?php
+
+foreach($subjects as $subject){
+    ?><option value="<?php echo $subject; ?>"><?php echo $subject; ?></option><?php
+}
+
+?>
+</select>
+</tr>
+
+
+<tr><td align="left"><p>
+    <font face = "Arial" size="4"><b><label for= "course"> Subject 3:</label></b></font></td>
+<td align ="left"><select name="subject3" class = "inputs">
+	
+	<option value=""></option>
+	<option value = "" disabled> - Subject 3 - </option>
+<?php
+
+foreach($subjects as $subject){
+    ?><option value="<?php echo $subject; ?>"><?php echo $subject; ?></option><?php
+}
+
+?>
+</select>
+</tr>
 
 
 <table align="center">

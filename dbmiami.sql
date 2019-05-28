@@ -57,22 +57,25 @@ INSERT INTO Subjects(subject_id,subject_name,ects) VALUES (010,'Algorithms',5);
 
 select * from subjects
     
-    
+drop table if exists Teachs
 create table Teachs(
 	profesor_id int,
     subject_id int,
     primary key(profesor_id,subject_id),
-    foreign key(profesor_id) references Profesors(profesor_id),
-    foreign key(subject_id) references Subjects(subject_id));
+    foreign key(profesor_id) references Profesors(profesor_id) on delete cascade,
+    foreign key(subject_id) references Subjects(subject_id) on delete cascade)
 INSERT INTO Teachs(profesor_id,subject_id) VALUES(1,003);
-    
+
+drop table if exists Grades
 create table Grades(
 	student_id int(10) unsigned,
     subject_id int,
     grade int,
     primary key(student_id,subject_id),
-    foreign key(student_id) references Students(student_id),
-    foreign key(subject_id) references Subjects(subject_id));
+    foreign key(student_id) references Students(student_id) on delete cascade,
+    foreign key(subject_id) references Subjects(subject_id) on delete cascade);
+    
+
 INSERT INTO Grades(student_id,subject_id,grade) values(19,003,9);
 INSERT INTO Grades(student_id,subject_id,grade) values(14,003,6);
 INSERT INTO Grades(student_id,subject_id,grade) values(18,003,10);
@@ -128,4 +131,14 @@ and St.student_id = 18
     
     
 select * from profesors
+
+select *
+from Teachs T, Subjects S, Profesors P
+where T.profesor_id = P.profesor_id and T.subject_id = S.subject_id 
+
+select * from subjects
+select * from teachs
+
+
+
 

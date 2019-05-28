@@ -383,8 +383,8 @@ if(isset($_POST['erase']) or (empty($data_missing))){
 
 <table align="center" cellspacing = "8">
 <tr><td align>
-<a href="fetchStudentData.php"><input type="submit" name="go" class="redirectButton" value="View Students" /></a></td></tr>
-
+    <a href="admin.php"><input type="button" name="go"  class="redirectButton" value="Home" /></a>
+    <a href="index.html"><input type="button" name="go"  class="redirectButton" value="Log Out" /></a>
 </table>
 
 <div id="studentWrapper">

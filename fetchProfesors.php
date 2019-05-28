@@ -1,13 +1,15 @@
+<?php
+session_start();
+?>
 
-
-    <html>
+<html>
     <head>
     <!-- Google fonts -->
     <link href='https://fonts.googleapis.com/css?family=Nothing+You+Could+Do' rel='stylesheet' type='text/css'>
     <!-- CSS style sheets -->
     <link rel="StyleSheet" href="./css/registration-design.css" />
     <link rel="StyleSheet" href="./css/message-design.css" />
-    <title>Fetch Student Data</title>
+    <title>Fetch Profesor's Data</title>
     <link rel="shortcut icon" type="image/png" href="./pictures/westmount.png"/>
     </head>
     <body>
@@ -16,7 +18,7 @@
     <table align="center" cellspacing = "8">
     <tr>
         <td align>
-        <form action="./addStudent.php" method="post">
+        <form  method="post">
             <a href="admin.php"><input type="button" name="go"  class="redirectButton" value="Home" /></a>
             <a href="index.html"><input type="button" name="go"  class="redirectButton" value="Log Out" /></a>
         </form>
@@ -38,17 +40,17 @@ if(!$conn){
 
 //	fshrija e te dhenes specifike nga databaza kur te klikohet butoni
 
-if (isset($_POST['student_id'])) {
-        $student_id = $_POST['student_id'];
+if (isset($_POST['profesor_id'])) {
+        $profesor_id = $_POST['profesor_id'];
         if (isset($_POST['delete'])) {
-            $sql = "DELETE FROM students WHERE student_id = " . $student_id;
+            $sql = "DELETE FROM profesors WHERE profesor_id = " . $profesor_id;
 			
 		    if (mysqli_query($conn, $sql))
 			{?>
 				<!-- Outputi pas fshirjes -->
 				<div class="isa_success">
 				<i class="fa fa-check"></i>
-					<?php echo "Student Deleted"; ?>
+					<?php echo "Profesor Deleted"; ?>
 				</div><?php
 			}
 			else
@@ -56,7 +58,7 @@ if (isset($_POST['student_id'])) {
 			{?>
 				<div class="isa_error">
 				<i class="fa fa-warning"></i>
-					<?php echo "Error Occurred ".mysqli_error($link); ?>
+					<?php echo "Error Occurred ".mysqli_error($conn); ?>
 				</div><?php
 			}
         }
@@ -65,14 +67,13 @@ if (isset($_POST['student_id'])) {
 
 <div id = "title">
     <img src="./images/miamilogo.png" alt="Banner" style="width:600px;height:300px;"/>
-    <h1>Student Information Database:</h1>
+    <h1>Profesor Information Database:</h1>
 </div>
 
 <?php
 
 //	Krijimi i queryt per databaz
-$query = "SELECT first_name, last_name, email, street_name, city,country,
-phone,d_day, d_month, d_year,gender, student_id FROM students ORDER BY student_id,first_name, last_name";
+$query = "SELECT * FROM profesors ";
 
 // Marrja e pergjigjes nga databaza duke derguar lidhjen dhe queryn
 $response = @mysqli_query($conn, $query);
@@ -81,7 +82,7 @@ $response = @mysqli_query($conn, $query);
 if($response){
     //	Outputi i numrit te studenteve me te dhena
     $num_rows = mysqli_num_rows($response);
-    echo "<p align='center'><font face = 'Architects Daughter' size='4pt'><i> * $num_rows student records fetched! </i></font></p>";
+    echo "<p align='center'><font face = 'Architects Daughter' size='4pt'><i> * $num_rows records fetched! </i></font></p>";
 
 
     echo '<table class = "studentinfo" align="center" cellpadding="8">
@@ -90,33 +91,34 @@ if($response){
     <td align="left"><font face = "Architects Daughter" size="3"><b>First Name</b></font></td>
     <td align="left"><font face = "Architects Daughter" size="3"><b>Last Name</b></font></td>
     <td align="left"><font face = "Architects Daughter" size="3"><b>Email</b></font></td>
-    <td align="left"><font face = "Architects Daughter" size="3"><b>Street</b></font></td>
-    <td align="left"><font face = "Architects Daughter" size="3"><b>City</b></font></td>
-    <td align="left"><font face = "Architects Daughter" size="3"><b>Country</b></font></td>
     <td align="left"><font face = "Architects Daughter" size="3"><b>Phone</b></font></td>
-    <td align="left"><font face = "Architects Daughter" size="3"><b>Birth Date</b></font></td>
-    <td align="left"><font face = "Architects Daughter" size="3"><b>Gender</b></font></td>';
+    <td align="left"><font face = "Architects Daughter" size="3"><b>Subject 1</b></font></td>
+    <td align="left"><font face = "Architects Daughter" size="3"><b>Subject 2</b></font></td>
+    <td align="left"><font face = "Architects Daughter" size="3"><b>Subject 3</b></font></td>';
+
+    $profesorId = $_SESSION['id'];
+    $subjectQuery = "select P.first_name,S.subject_name
+                    from Teachs T, Subjects S, Profesors P
+                    where T.profesor_id = P.profesor_id and T.subject_id = S.subject_id and P.profesor_id=$profesorId";
 
 
     // Kthe nje rresht te te dhenave nga query derisa t'mos ket te dhena tjera
     while($row = mysqli_fetch_array($response)){
         echo '<tr><td align="left">' . 
-        $row['student_id'] . '</td><td align="left">' . 
+        $row['profesor_id'] . '</td><td align="left">' . 
         $row['first_name'] . '</td><td align="left">' . 
         $row['last_name'] . '</td><td align="left">' .
         $row['email'] . '</td><td align="left">' .
-        $row['street_name'] . '</td><td align="left">' . 
-        $row['city'] . '</td><td align="left">' .
-        $row['country'] . '</td><td align="left">' . 
-        $row['phone'] . '</td><td align="left">' .
-        $row['d_month'] ." ".$row['d_day'] .", ".$row['d_year'] .'</td><td align="left">'.
-        $row['gender'] . '</td><td align="left">';
+        $row['phone'] . '</td><td align="left">'.
+        "test1" . '</td><td align="left">'.
+        "test2" . '</td><td align="left">'.
+        "test3" . '</td><td align="left">';
         ?>
 
         <!-- eventat ne form qendrojn ne faqe -->
         <form method="post" action="">
             <!-- Butonai fshehur ruan id specifike te studentit -->
-            <td><input type="hidden" id = "student_id" name="student_id" value="<?php echo $row['student_id']; ?>" /></td>
+            <td><input type="hidden" id = "student_id" name="profesor_id" value="<?php echo $row['profesor_id']; ?>" /></td>
             <!-- butoni delete -->
             <td><input type="submit" name="delete" class="deleteButton" value="Delete" onclick="return confirm('Are you sure?')" /></td>
         </form>

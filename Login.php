@@ -53,7 +53,7 @@ else{
             if($rows==1 && $role=='admin' && password_verify($password,$hashPw)){
                 $incorrectError = "";
                 $_SESSION['credentialsEntered']==true;
-               header('Location: fetchStudentData.php');
+               header('Location: admin.php');
 
             }
             else if($rows==1 && $role=='student' && password_verify($password,$hashPw)){
@@ -66,6 +66,7 @@ else{
                 header('Location: studentet.php');
             }
             else if($rows==1 && $role=='profesor' && password_verify($password,$hashPw)){
+                $_SESSION['id'] = $username;
                 echo '<script type="text/javascript">';
                 echo 'alert("Jeni kyqur si profesor!")';
                 echo '</script>';
