@@ -1,3 +1,10 @@
+<?php
+if(session_status()== PHP_SESSION_NONE){
+    session_start();
+}
+
+if(isset($_SESSION['adminLoggedin'])){
+?>
 
     <html>
     <head>
@@ -31,4 +38,10 @@
     <img src="./images/miamilogo.png" alt="Banner" style="width:600px;height:300px;"/>
     <h1>Administrator Page</h1>
 </div>
+
+<?php
+}
+else{
+    require_once('Login.php');
+}
         

@@ -1,4 +1,12 @@
 <?php
+
+if(session_status()== PHP_SESSION_NONE){
+    session_start();
+}
+
+if(isset($_SESSION['adminLoggedin'])){
+
+
 // funksion per normalizim te tekstit, varesisht nga parametri $numbers(true or false)
 // caktojme tekstin a do te jete me numra apo pa numra
 // Poashtu kthen tekstin me shkronjen e pare te madhe dhe pa hapesira
@@ -378,3 +386,9 @@ foreach($subjects as $subject){
 
 </body>
 </html>
+
+<?php
+}
+else{
+    require_once('logout.php');
+}

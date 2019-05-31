@@ -1,3 +1,12 @@
+<?php
+if(session_status()== PHP_SESSION_NONE){
+    session_start();
+}
+
+if(isset($_SESSION['adminLoggedin'])){
+?>
+
+
 <html>
     <head>
     <!-- Google fonts -->
@@ -118,3 +127,9 @@ mysqli_close($conn);
 ?>
 </body>
 </html>
+
+<?php
+}
+else{
+    require_once('logout.php');
+}

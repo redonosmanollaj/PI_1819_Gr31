@@ -1,10 +1,13 @@
 <?php
-session_start();
+if(session_status()== PHP_SESSION_NONE){
+    session_start();
+}
 
 unset($_SESSION['id']);
 unset($_SESSION['password']);
+
 session_destroy();
 
-header("Location: index.html");
+header("Location: Login.php");
 
 ?>

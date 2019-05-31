@@ -51,6 +51,7 @@ function get_post($conn,$var){
                 $incorrectError = "";
                 $_SESSION['id'] = $username;
                 $_SESSION['password'] = $password;
+                $_SESSION['adminLoggedin'] = true;
                header('Location: admin.php');
 
             }
@@ -61,11 +62,13 @@ function get_post($conn,$var){
                 echo '</script>';
                 $_SESSION['id'] = $username;
                 $_SESSION['password'] = $password;
+                $_SESSION['studentLoggedin'] = true;
                 header('Location: studentet.php');
             }
             else if($rows==1 && $role=='profesor' && password_verify($password,$hashPw)){
                 $_SESSION['id'] = $username;
                 $_SESSION['password'] = $password;
+                $_SESSION['profesorLoggedin']=true;
                 echo '<script type="text/javascript">';
                 echo 'alert("Jeni kyqur si profesor!")';
                 echo '</script>';
@@ -86,7 +89,8 @@ function get_post($conn,$var){
 ?>
 
 <body>
-        
+<button class="hyrja"><a href="index.html">< GO HOME</a></button>
+
         <div class="login">
             <a><img src="images/login.png" class="img"></a>
 

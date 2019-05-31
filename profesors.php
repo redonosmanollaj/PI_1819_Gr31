@@ -1,5 +1,9 @@
 <?php
-session_start();
+if(session_status()== PHP_SESSION_NONE){
+    session_start();
+}
+
+if(isset($_SESSION['profesorLoggedin'])){
 ?>
 
 
@@ -11,7 +15,7 @@ session_start();
     <!-- CSS style sheets -->
     <link rel="StyleSheet" href="./css/registration-design.css" />
     <link rel="StyleSheet" href="./css/message-design.css" />
-    <title>Admin Page</title>
+    <title>Profesor Page</title>
     <link rel="shortcut icon" type="image/png" href="./pictures/westmount.png"/>
     </head>
     <body>
@@ -23,7 +27,7 @@ session_start();
         <td align>
         <form action="./addStudent.php" method="post">
             <a href="fetchGrades.php"><input type="button" name="go"  class="redirectButton" value="View Grades" /></a>
-            <a href="#"><input type="button" name="go"  class="redirectButton" value="Edit Grades" /></a>
+            <a href="editGrades.php"><input type="button" name="go"  class="redirectButton" value="Edit Grades" /></a>
             <a href="changePassword.php"><input type="button" name="go"  class="redirectButton" value="Change Password" /></a>
             <a href="logout.php"><input type="button" name="go"  class="redirectButton" value="Log Out" /></a>
         </form>
@@ -59,7 +63,10 @@ $myName = $row['first_name'].' '.$row['last_name'];
 
 echo "<h2 align='center'>$profesor_id &nbsp &nbsp $myName</h2>";
 
-
 ?>
-
+<?php
+}
+else{
+    require_once('logout.php');
+}
         

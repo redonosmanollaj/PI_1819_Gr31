@@ -1,6 +1,10 @@
 <?php
 
-session_start();
+if(session_status()== PHP_SESSION_NONE){
+    session_start();
+}
+
+if(isset($_SESSION['adminLoggedin']) or isset($_SESSION['studentLoggedin']) or isset($_SESSION['profesorLoggedin'])){
 
 function get_post($conn,$var){
     return $conn->real_escape_string($_POST[$var]);
@@ -90,3 +94,9 @@ if(isset($_POST['submit'])){
 
     </body>
 </html>
+
+<?php
+}
+else{
+    require_once('logout.php');
+}
