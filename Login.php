@@ -69,7 +69,7 @@ function get_post($conn,$var){
                 echo '<script type="text/javascript">';
                 echo 'alert("Jeni kyqur si profesor!")';
                 echo '</script>';
-                header('Location: profesoret.php');
+                header('Location: profesors.php');
             }
             else{
                 $incorrectError = "* Username or password are incorrect!";
