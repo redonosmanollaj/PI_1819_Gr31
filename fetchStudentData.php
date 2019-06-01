@@ -50,8 +50,8 @@ if (isset($_POST['student_id'])) {
         $student_id = $_POST['student_id'];
         if (isset($_POST['delete'])) {
             $sql = "DELETE FROM students WHERE student_id = " . $student_id;
-			
-		    if (mysqli_query($conn, $sql))
+			$sqlDeleteUser = "DELETE FROM users WHERE username = '".$student_id."'";
+		    if (mysqli_query($conn, $sql) && mysqli_query($conn,$sqlDeleteUser))
 			{?>
 				<!-- Outputi pas fshirjes -->
 				<div class="isa_success">
@@ -64,7 +64,7 @@ if (isset($_POST['student_id'])) {
 			{?>
 				<div class="isa_error">
 				<i class="fa fa-warning"></i>
-					<?php echo "Error Occurred ".mysqli_error($link); ?>
+					<?php echo "Error Occurred ".mysqli_error($conn); ?>
 				</div><?php
 			}
         }

@@ -48,8 +48,8 @@ if (isset($_POST['profesor_id'])) {
         $profesor_id = $_POST['profesor_id'];
         if (isset($_POST['delete'])) {
             $sql = "DELETE FROM profesors WHERE profesor_id = " . $profesor_id;
-			
-		    if (mysqli_query($conn, $sql))
+            $sqlDeleteUser = "DELETE FROM users WHERE username = '".$profesor_id."'";
+		    if (mysqli_query($conn, $sql) && mysql_query($conn,$sqlDeleteUser))
 			{?>
 				<!-- Outputi pas fshirjes -->
 				<div class="isa_success">

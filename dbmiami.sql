@@ -25,6 +25,8 @@ CREATE TABLE IF NOT EXISTS students (
   student_id int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (student_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8;
+alter table students auto_increment = 100
+
 
 create table Profesors(
 	profesor_id int auto_increment,
@@ -33,6 +35,7 @@ create table Profesors(
     email varchar(60),
     primary key(profesor_id));
 ALTER TABLE Profesors add phone varchar(20);
+alter table Profesors auto_increment = 10;
     
 INSERT INTO Profesors(first_name,last_name,email) values('Ruzhdi','Sefa','ruzhdi.sefa@uni-pr.edu');
 
@@ -143,6 +146,7 @@ where T.profesor_id = P.profesor_id and T.subject_id = S.subject_id;
 select * from subjects
 select * from teachs
 select * from grades
+REPLACE INTO Grades(student_id,subject_id,grade) VALUES(8,3,10);
 
 -- lendet te cilat i jep profesori
 select S.subject_id,S.subject_name
@@ -155,6 +159,19 @@ from Grades
 where student_id = 19 and subject_id = 003;
 
 
+SELECT S.subject_id, S.subject_name 
+                  FROM Teachs T, Subjects S 
+                  WHERE S.subject_id=T.subject_id and T.profesor_id=7
+
+
+delete from Students
+delete from Messages
+delete from Profesors
+select * from teachs
+select * from grades
+select * from users
+
+delete from users where userid>1
 
 
 
