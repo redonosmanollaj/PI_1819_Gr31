@@ -89,7 +89,7 @@ function get_post($conn,$var){
 ?>
 
 <body>
-<button class="hyrja"><a href="index.html">< GO HOME</a></button>
+<button class="hyrja"><a href="index.html">Back</a></button>
 
         <div class="login">
             <a><img src="images/login.png" class="img"></a>

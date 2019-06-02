@@ -33,14 +33,22 @@
 }
 .hyrja {
     background-color: rgba(51, 188, 226, 0.634);
-    border-radius: 3px;
-    width: 250px;
+    border-radius: 10px;
+    width: 100px;
     height: 30;
-    font-size: 20px;
+    font-size: 15px;
     margin-top: 20px;
     margin-left: 47px;
     color: rgb(193, 193, 193);
     font-family: fantasy;
+}
+.hyrja:hover{
+    text-decoration: overline;
+    background-color: dodgerblue;
+}
+a{
+    text-decoration: none;
+    color: rgb(200, 83, 83);
 }
 body {
     background-color: rgba(153, 250, 231, 0.883);

@@ -79,6 +79,11 @@
 	-webkit-border-radius:40px;
 	border:1px solid #095B7E
 	}
+	a{
+		text-decoration: none;
+	}
+
+	
 
 	#studentWrapper {
 		width: 850px;
@@ -144,6 +149,7 @@
     background: #DFE9EC;
     color: #414848;
 }
+
 
 
 
